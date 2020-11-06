@@ -20,23 +20,11 @@ namespace Poll.Domain.Entities
             Name = name;
             Email = email;
             Password = password;
-        }
-
-        public Employee(Guid id, string name, string email)
-        {
-            Id = id;
-            Name = name;
-            Email = email;
-        }
+        }       
 
         internal static Employee AddEmployee(string name, string email, string password)
         {
             return new Employee(name, email, password);
-        }
-
-        internal static Employee ChangeEmployee(Guid id, string name, string email)
-        {
-            return new Employee(id, name, email);
-        }
+        }       
     }
 }
