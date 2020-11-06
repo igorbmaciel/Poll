@@ -16,22 +16,11 @@ namespace Poll.Domain.Entities
         {
             Id = Guid.NewGuid();
             Name = name;           
-        }
-
-        public Task(Guid id, string name)
-        {
-            Id = id;
-            Name = name;           
-        }
+        }      
 
         internal static Task AddTask(string name)
         {
             return new Task(name);
-        }
-
-        internal static Task ChangeTask(Guid id, string name)
-        {
-            return new Task(id, name);
-        }
+        }       
     }
 }
