@@ -12,7 +12,7 @@ namespace Poll.Web
         {
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Thex Addon API", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Poll API", Version = "v1" });
                 c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {
                     Description = "JWT Authorization header using the Bearer scheme.",
@@ -44,9 +44,9 @@ namespace Poll.Web
             app.UseSwaggerUI(c =>
             {
                 if (Debugger.IsAttached)
-                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Addon API V1");
+                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Poll API V1");
                 else
-                    c.SwaggerEndpoint("/addon/swagger/v1/swagger.json", "Addon API V1");
+                    c.SwaggerEndpoint("/poll/swagger/v1/swagger.json", "Poll API V1");
             });
 
             return app;
