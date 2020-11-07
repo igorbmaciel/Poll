@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore;
+﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
+using Serilog;
+using System;
+using System.IO;
 
 namespace Poll.Web
 {
@@ -14,11 +11,43 @@ namespace Poll.Web
     {
         public static void Main(string[] args)
         {
-            CreateWebHostBuilder(args).Build().Run();
-        }
+            Console.Title = typeof(Program).Namespace;
 
-        public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>();
+            var hostConfig = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("hosting.json")
+                .Build();
+
+            var host = WebHost.CreateDefaultBuilder(args)
+                .UseConfiguration(hostConfig)
+                .ConfigureAppConfiguration((hostingContext, config) =>
+                {
+                    var env = hostingContext.HostingEnvironment;
+                    config.AddJsonFile($"appsettings.json", optional: false, reloadOnChange: true)
+                      .AddJsonFile($"appsettings.{env.EnvironmentName}.json",
+                                     optional: true, reloadOnChange: true);
+
+                    config.AddEnvironmentVariables();
+                    config.AddCommandLine(args);
+                })
+                .ConfigureLogging((hostingContext, logging) =>
+                {
+                    Log.Logger = new LoggerConfiguration()
+                        .Enrich.WithMachineName()
+                        .ReadFrom.Configuration(hostingContext.Configuration)
+                        .CreateLogger();
+                })
+                .UseStartup<Startup>()
+                .UseSerilog()
+                .UseKestrel()
+                .UseContentRoot(Directory.GetCurrentDirectory())
+                .UseIISIntegration()
+                .UseSetting("detailedErrors", "true")
+                .Build();
+
+            host.Run();
+
+            Log.CloseAndFlush();
+        }
     }
 }
