@@ -3,6 +3,7 @@
   "texts": {
     "InvalidEmployeeName": "Nome do funcionário inválido",
     "InvalidEmployeeEmail": "Email do funcionário inválido",
-    "InvalidEmployeePassword": "Senha do funcionário inválido"
+    "InvalidEmployeePassword": "Senha do funcionário inválido",
+    "InvalidTaskName": "Noma da tarefa inválida"
   }
 }
