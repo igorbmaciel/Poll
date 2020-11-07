@@ -12,8 +12,4 @@
     <PackageReference Include="Tnf.Repositories" Version="2.7.0.21802" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Properties\" />
-  </ItemGroup>
-
 </Project>

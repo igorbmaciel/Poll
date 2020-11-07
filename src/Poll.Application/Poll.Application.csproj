@@ -4,4 +4,13 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Poll.Domain\Poll.Domain.csproj" />
+    <ProjectReference Include="..\Poll.Infra\Poll.Infra.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Tnf.Domain" Version="2.7.0.21802" />
+  </ItemGroup>
+
 </Project>
