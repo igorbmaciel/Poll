@@ -22,7 +22,7 @@ namespace Poll.Domain.Entities
             Password = password;
         }       
 
-        internal static Employee AddEmployee(string name, string email, string password)
+        internal Employee AddEmployee(string name, string email, string password)
         {
             return new Employee(name, email, password);
         }       
