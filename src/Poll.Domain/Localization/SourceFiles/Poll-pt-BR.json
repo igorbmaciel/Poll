@@ -1,0 +1,8 @@
+{
+  "culture": "pt-BR",
+  "texts": {
+    "InvalidEmployeeName": "Nome do funcionário inválido",
+    "InvalidEmployeeEmail": "Email do funcionário inválido",
+    "InvalidEmployeePassword": "Senha do funcionário inválido"
+  }
+}
