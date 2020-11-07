@@ -1,30 +1,29 @@
 ﻿{
-  "$schema": "http://json.schemastore.org/launchsettings.json",
   "iisSettings": {
-    "windowsAuthentication": false, 
-    "anonymousAuthentication": true, 
+    "windowsAuthentication": false,
+    "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:57308",
-      "sslPort": 44399
+      "applicationUrl": "http://localhost:5033",
+      "sslPort": 0
     }
   },
   "profiles": {
-    "IIS Express": {
-      "commandName": "IISExpress",
-      "launchBrowser": true,
-      "launchUrl": "api/values",
-      "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
-      }
-    },
-    "Poll.Web": {
+    "Poll DEV": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "api/values",
-      "applicationUrl": "https://localhost:5001;http://localhost:5000",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
-      }
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "Serilog:MinimumLevel": "Debug"
+      },
+      "applicationUrl": "http://localhost:5033"
+    },
+    "Poll PROD": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Production"
+      },
+      "applicationUrl": "http://localhost:5033"
     }
   }
 }

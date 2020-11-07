@@ -1,48 +1,94 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.IO.Compression;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
+using Poll.Domain;
+using Microsoft.AspNetCore.Http;
 
 namespace Poll.Web
 {
     public class Startup
     {
+        private IConfiguration _configuration { get; set; }
+
         public Startup(IConfiguration configuration)
         {
-            Configuration = configuration;
+            _configuration = configuration;
         }
 
-        public IConfiguration Configuration { get; }
-
-        // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
+        public IServiceProvider ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.Configure<GzipCompressionProviderOptions>(
+                options => options.Level = CompressionLevel.Optimal);
+
+            services
+                .AddCorsAll("AllowAll")
+                .AddApplicationServiceDependency(_configuration)
+                .AddTnfAspNetCore()
+                .AddResponseCompression(options =>
+                {
+                    options.Providers.Add<GzipCompressionProvider>();
+                    options.EnableForHttps = true;
+                });          
+
+            services.AddSwaggerDocumentation();
+
+            services.AddAntiforgery(options =>
+            {
+                options.Cookie.Name = "X-CSRF-TOKEN-GOTNEXT-COOKIE";
+                options.HeaderName = "X-CSRF-TOKEN-GOTNEXT-HEADER";
+                options.SuppressXFrameOptionsHeader = false;
+            })
+            .AddMvc()
+            .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
+            .AddJsonOptions(opts =>
+            {
+                opts.SerializerSettings.NullValueHandling =
+                    Newtonsoft.Json.NullValueHandling.Ignore;
+            });
+
+            var serviceProvider = services.BuildServiceProvider();
+
+            ServiceLocator.SetLocatorProvider(serviceProvider);
+
+            return serviceProvider;
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILogger<Startup> logger, IHttpContextAccessor contextAccessor)
         {
+            app.UseCors("AllowAll");
+
+            app.UseTnfAspNetCore(options =>
+            {
+                options.DefaultNameOrConnectionString = _configuration["ConnectionStrings:PostgresSQL"];
+                options.UseDomainLocalization();
+            });
+
+            app.UsePathBase("/poll");
+
             if (env.IsDevelopment())
-            {
                 app.UseDeveloperExceptionPage();
-            }
-            else
-            {
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
-            }
 
-            app.UseHttpsRedirection();
-            app.UseMvc();
+            app.UseSwaggerDocumentation();
+
+            app.UseMvcWithDefaultRoute();
+
+            app.UseResponseCompression();
+
+            app.ApplicationServices.MigrateDatabase();
+
+            app.Run(context =>
+            {
+                context.Response.Redirect("/poll/swagger");
+                return Task.CompletedTask;
+            });
         }
+
     }
 }
