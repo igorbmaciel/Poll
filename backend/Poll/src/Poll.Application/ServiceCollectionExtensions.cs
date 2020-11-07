@@ -12,7 +12,8 @@ namespace Microsoft.Extensions.DependencyInjection
                 .AddInfraDependency(configuration)
                 .AddDomainDependency(configuration);
 
-            services.AddTransient<IEmployeeAppService, EmployeeAppService>();       
+            services.AddTransient<IEmployeeAppService, EmployeeAppService>();
+            services.AddTransient<ITaskAppService, TaskAppService>();
 
             return services;
         }

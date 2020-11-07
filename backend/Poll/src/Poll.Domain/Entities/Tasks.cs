@@ -18,7 +18,7 @@ namespace Poll.Domain.Entities
             Name = name;           
         }      
 
-        internal static Tasks AddTask(string name)
+        internal Tasks AddTask(string name)
         {
             return new Tasks(name);
         }       

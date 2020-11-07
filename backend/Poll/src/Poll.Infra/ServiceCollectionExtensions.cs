@@ -25,6 +25,7 @@ namespace Microsoft.Extensions.DependencyInjection
 
             //Repositories
             services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+            services.AddScoped<ITaskRepository, TasksRepository>();
 
             return services;
         }
