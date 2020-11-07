@@ -9,6 +9,7 @@ namespace Poll.Infra.Context
     public class PollContext : TnfDbContext
     {
         public DbSet<Employee> Employees { get; set; }
+        public DbSet<Tasks> Tasks { get; set; }
 
         public PollContext(DbContextOptions options, ITnfSession session)
            : base(options, session)
@@ -25,6 +26,7 @@ namespace Poll.Infra.Context
             ApplyTableNameToLowerConventions(modelBuilder);
 
             modelBuilder.ApplyConfiguration(new EmployeeMapper());
+            modelBuilder.ApplyConfiguration(new TasksMapper());
 
             base.OnModelCreating(modelBuilder);
         }

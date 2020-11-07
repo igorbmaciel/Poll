@@ -4,25 +4,22 @@ using Poll.Domain.Entities;
 
 namespace Poll.Infra.Mappers
 {
-    public class EmployeeMapper : IEntityTypeConfiguration<Employee>
+    public class TasksMapper : IEntityTypeConfiguration<Tasks>
     {
-        public void Configure(EntityTypeBuilder<Employee> mapper)
+        public void Configure(EntityTypeBuilder<Tasks> mapper)
         {
-            mapper.ToTable("Employee");
+            mapper.ToTable("Tasks");
 
             mapper.Property(e => e.Id)
-                .HasAnnotation("Relational:ColumnName", "EmployeeId")
+                .HasAnnotation("Relational:ColumnName", "TasksId")
                 .ValueGeneratedOnAdd();
 
             mapper.HasKey(e => e.Id);
 
             mapper.Property(e => e.Name)
                 .IsRequired();
-         
-            mapper.Property(e => e.Password)
-              .IsRequired();          
 
-            mapper.HasIndex(e =>  e.Id)
+            mapper.HasIndex(e => e.Id)
                  .IsUnique();
         }
     }
