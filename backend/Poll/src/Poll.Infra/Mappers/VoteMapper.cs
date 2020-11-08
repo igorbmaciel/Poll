@@ -29,9 +29,9 @@ namespace Poll.Infra.Mappers
                  .HasAnnotation("Relational:ColumnName", "Comment");
 
             mapper.Property(e => e.Date)
-               .HasColumnType("datetime")
-               .HasDefaultValueSql("(getutcdate())")
-               .HasAnnotation("Relational:ColumnName", "Date");
+                       .HasColumnType("timestamp")
+                       .HasDefaultValueSql("(now() at time zone 'utc')")
+                       .HasAnnotation("Relational:ColumnName", "Date");
 
             mapper.HasOne(d => d.Employee)
                .WithMany(p => p.VoteList)
