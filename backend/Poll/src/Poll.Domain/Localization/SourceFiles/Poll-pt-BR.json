@@ -7,6 +7,8 @@
     "InvalidTaskName": "Favor informar o nome da tarefa",
     "InvalidEmployeeId": "Favor informar o funcionário",
     "InvalidTaskId": "Favor informar a tarefa",
-    "InvalidComment": "Favor informar o comentário"
+    "InvalidComment": "Favor informar o comentário",
+    "InvalidTask": "Informe uma tarefa válida",
+    "InvalidEmployee": "Informe um funcionário válido"
   }
 }

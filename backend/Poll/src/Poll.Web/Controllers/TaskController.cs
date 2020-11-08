@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Poll.Application.Interfaces;
+using Poll.Domain.Entities;
 using Poll.Domain.Queries.Request;
 using Poll.Domain.Queries.Response;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Tnf.AspNetCore.Mvc.Response;
 
@@ -26,6 +28,16 @@ namespace Poll.Web.Controllers
             var response = await _taskAppService.AddTask(command);
 
             return CreateResponseOnPost(response, RouteResponseConsts.Task);
+        }
+
+        [HttpGet]
+        [ProducesResponseType(typeof(List<Tasks>), 200)]
+        [ProducesResponseType(typeof(ErrorResponse), 400)]
+        [ProducesResponseType(404)]
+        public async Task<IActionResult> Get()
+        {
+            var response = await _taskAppService.GetAllTasks();
+            return CreateResponseOnGet(response, RouteResponseConsts.Task);
         }
 
     }

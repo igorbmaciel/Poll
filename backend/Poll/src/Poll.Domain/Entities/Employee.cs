@@ -81,7 +81,8 @@ namespace Poll.Domain.Entities
         {
             InvalidEmployeeName,
             InvalidEmployeeEmail,
-            InvalidEmployeePassword
+            InvalidEmployeePassword,
+            InvalidEmployee
         }
     }
 }
