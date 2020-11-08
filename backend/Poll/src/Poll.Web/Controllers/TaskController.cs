@@ -49,5 +49,15 @@ namespace Poll.Web.Controllers
             return CreateResponseOnGet(response, RouteResponseConsts.Task);
         }
 
+        [HttpGet("Votes")]
+        [ProducesResponseType(typeof(List<GetVotesResponse>), 200)]
+        [ProducesResponseType(typeof(ErrorResponse), 400)]
+        [ProducesResponseType(404)]
+        public async Task<IActionResult> GetTasksVotes()
+        {
+            var response = await _taskAppService.GetTasksVotes();
+            return CreateResponseOnGet(response, RouteResponseConsts.Task);
+        }
+
     }
 }

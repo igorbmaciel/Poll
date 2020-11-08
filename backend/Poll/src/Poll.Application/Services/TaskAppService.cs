@@ -59,6 +59,9 @@ namespace Poll.Application.Services
             return ReturnTasksVotes(tasksVotesList, employeeVotesList);
         }
 
+        public Task<List<GetVotesResponse>> GetTasksVotes()
+            => _taskReadRepository.GetVotes();
+
         private List<GetTasksVotesResponse> ReturnTasksVotes(List<GetTasksVotesResponse> tasksVotesList, List<GetEmployeeVotesResponse> employeeVotesList)
         {
             tasksVotesList.ForEach(t => t.EmployeeVotes.AddRange(employeeVotesList.Where(x => x.TasksId == t.TaskId)));
@@ -98,6 +101,6 @@ namespace Poll.Application.Services
             }));
 
             return tasksResponseList;
-        }
+        }        
     }
 }

@@ -7,5 +7,6 @@ namespace Poll.Domain.Interfaces.ReadRepository
     public interface ITaskReadRepository
     {
         Task<List<GetTasksResponse>> GetTasksVotes();
+        Task<List<GetVotesResponse>> GetVotes();
     }
 }
