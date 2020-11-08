@@ -10,5 +10,6 @@ namespace Poll.Application.Interfaces
         Task<AddTaskResponse> AddTask(AddTaskCommand command);
         Task<List<GetAllTasksResponse>> GetAllTasks();
         Task<List<GetTasksVotesResponse>> GetTasksEmployeeVotes();
+        Task<List<GetVotesResponse>> GetTasksVotes();
     }
 }

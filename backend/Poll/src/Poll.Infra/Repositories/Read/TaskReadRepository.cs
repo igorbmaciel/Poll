@@ -26,5 +26,16 @@ namespace Poll.Infra.Repositories.Read
 
             return (await Connection.QueryAsync<GetTasksResponse>(sqlQuery)).ToList();
         }
+
+        public async Task<List<GetVotesResponse>> GetVotes()
+        {
+            var sqlQuery = @"select t.name as TaskName, count(*) as QuantityVotes
+                            from public.""Vote"" v
+                            join public.""Tasks"" t on t.""TasksId"" = v.TaskId
+                            group by v.taskId, t.name
+                            order by QuantityVotes desc";
+
+            return (await Connection.QueryAsync<GetVotesResponse>(sqlQuery)).ToList();
+        }
     }
 }
