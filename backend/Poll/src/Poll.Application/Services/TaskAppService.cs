@@ -36,7 +36,22 @@ namespace Poll.Application.Services
             return response;
         }
 
-        public Task<List<Tasks>> GetAllTasks()
-            => _taskRepository.GetAllTasks();
+        public async Task<List<GetAllTasksResponse>> GetAllTasks()
+        {
+            var tasks = await _taskRepository.GetAllTasks();
+            return TasksResponse(tasks);
+        }
+
+        private List<GetAllTasksResponse> TasksResponse(List<Tasks> tasks)
+        {
+            var tasksResponseList = new List<GetAllTasksResponse>();
+            tasks.ForEach(t => tasksResponseList.Add(new GetAllTasksResponse()
+            {
+                Id = t.Id,
+                Name = t.Name
+            }));
+
+            return tasksResponseList;
+        }
     }
 }

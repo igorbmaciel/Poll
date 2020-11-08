@@ -31,7 +31,7 @@ namespace Poll.Web.Controllers
         }
 
         [HttpGet]
-        [ProducesResponseType(typeof(List<Tasks>), 200)]
+        [ProducesResponseType(typeof(List<GetAllTasksResponse>), 200)]
         [ProducesResponseType(typeof(ErrorResponse), 400)]
         [ProducesResponseType(404)]
         public async Task<IActionResult> Get()

@@ -15,7 +15,7 @@ namespace Poll.Domain
                     typeof(LocalizationExtensions).Assembly,
                     "Poll.Domain.Localization.SourceFiles")));
 
-            configuration.Localization.Languages.Add(new LanguageInfo("pt-BR", "Português", isDefault: true));     
+            configuration.Localization.Languages.Add(new LanguageInfo("pt-BR", "Português", isDefault: true));          
         }
     }
 }

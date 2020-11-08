@@ -81,8 +81,6 @@ namespace Poll.Web
 
             app.UseResponseCompression();
 
-            app.ApplicationServices.MigrateDatabase();
-
             app.Run(context =>
             {
                 context.Response.Redirect("/poll/swagger");
