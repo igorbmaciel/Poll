@@ -52,6 +52,13 @@ namespace Poll.Domain.Handlers
 
             if (_notification.HasNotification()) return null;
 
+            var alreadyVoted = await _voteRepository.ValidateVoteByEmployeeId(command.EmployeeId);
+
+            if (alreadyVoted)
+                EmployeeAlreadyVoted(_notification);
+
+            if (_notification.HasNotification()) return null;
+
             var vote = new Vote();
 
             vote = vote.AddVote(command.EmployeeId, command.TaskId, command.Comment, _notification);
@@ -66,6 +73,11 @@ namespace Poll.Domain.Handlers
             }
 
             return VoteResponse(vote);
+        }
+
+        private void EmployeeAlreadyVoted(INotificationHandler notification)
+        {
+            notification.RaiseError(AppConsts.LocalizationSourceName, Vote.EntityError.EmployeeAlreadyVoted);
         }
 
         private void InvalidTask(INotificationHandler notification)

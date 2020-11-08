@@ -79,7 +79,8 @@ namespace Poll.Domain.Entities
         {
             InvalidEmployeeId,
             InvalidTaskId,
-            InvalidComment
+            InvalidComment,
+            EmployeeAlreadyVoted
         }
     }
 }
