@@ -10,6 +10,7 @@ namespace Poll.Infra.Context
     {
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Tasks> Tasks { get; set; }
+        public DbSet<Vote> Votes { get; set; }
 
         public PollContext(DbContextOptions options, ITnfSession session)
            : base(options, session)
@@ -27,6 +28,7 @@ namespace Poll.Infra.Context
 
             modelBuilder.ApplyConfiguration(new EmployeeMapper());
             modelBuilder.ApplyConfiguration(new TasksMapper());
+            modelBuilder.ApplyConfiguration(new VoteMapper());
 
             base.OnModelCreating(modelBuilder);
         }
