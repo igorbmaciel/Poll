@@ -14,22 +14,22 @@ namespace Poll.Domain.Queries.Request
             ValidationResult = new AddTaskValidator().Validate(this);
 
             return ValidationResult.IsValid;
+        }       
+    }
+
+    public class AddTaskValidator : AbstractValidator<AddTaskCommand>
+    {
+        public AddTaskValidator()
+        {
+            RuleFor(e => e.Name)
+                .NotEmpty()
+                .WithState(e => EntityError.InvalidTaskName);
+
         }
 
-        public class AddTaskValidator : AbstractValidator<AddTaskCommand>
+        public enum EntityError
         {
-            public AddTaskValidator()
-            {
-                RuleFor(e => e.Name)
-                    .NotEmpty()
-                    .WithState(e => EntityError.InvalidTaskName);
-        
-            }
-
-            public enum EntityError
-            {
-                InvalidTaskName              
-            }
+            InvalidTaskName
         }
     }
 }
