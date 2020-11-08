@@ -16,33 +16,33 @@ namespace Poll.Domain.Queries.Request
             ValidationResult = new AddEmployeeValidator().Validate(this);
 
             return ValidationResult.IsValid;
+        }       
+    }
+
+    public class AddEmployeeValidator : AbstractValidator<AddEmployeeCommand>
+    {
+        public AddEmployeeValidator()
+        {
+            RuleFor(e => e.Name)
+                .NotEmpty()
+                .WithState(e => EntityError.InvalidEmployeeName);
+
+
+            RuleFor(e => e.Email)
+                .NotEmpty()
+                .WithState(e => EntityError.InvalidEmployeeEmail);
+
+
+            RuleFor(e => e.Password)
+                .NotEmpty()
+                .WithState(e => EntityError.InvalidEmployeePassword);
         }
 
-        public class AddEmployeeValidator : AbstractValidator<AddEmployeeCommand>
+        public enum EntityError
         {
-            public AddEmployeeValidator()
-            {
-                RuleFor(e => e.Name)
-                    .NotEmpty()
-                    .WithState(e => EntityError.InvalidEmployeeName);
-
-
-                RuleFor(e => e.Email)
-                    .NotEmpty()
-                    .WithState(e => EntityError.InvalidEmployeeEmail);
-
-
-                RuleFor(e => e.Password)
-                    .NotEmpty()
-                    .WithState(e => EntityError.InvalidEmployeePassword);
-            }
-
-            public enum EntityError
-            {
-                InvalidEmployeeName,
-                InvalidEmployeeEmail,
-                InvalidEmployeePassword
-            }
+            InvalidEmployeeName,
+            InvalidEmployeeEmail,
+            InvalidEmployeePassword
         }
     }
 }

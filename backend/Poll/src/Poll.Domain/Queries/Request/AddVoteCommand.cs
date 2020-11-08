@@ -17,31 +17,31 @@ namespace Poll.Domain.Queries.Request
             ValidationResult = new AddVoteValidator().Validate(this);
 
             return ValidationResult.IsValid;
+        }       
+    }
+
+    public class AddVoteValidator : AbstractValidator<AddVoteCommand>
+    {
+        public AddVoteValidator()
+        {
+            RuleFor(e => e.EmployeeId)
+                .NotEmpty()
+                .WithState(e => EntityError.InvalidEmployeeId);
+
+            RuleFor(e => e.TaskId)
+                .NotEmpty()
+                .WithState(e => EntityError.InvalidTaskId);
+
+            RuleFor(e => e.Comment)
+                .NotEmpty()
+                .WithState(e => EntityError.InvalidComment);
         }
 
-        public class AddVoteValidator : AbstractValidator<AddVoteCommand>
+        public enum EntityError
         {
-            public AddVoteValidator()
-            {
-                RuleFor(e => e.EmployeeId)
-                    .NotEmpty()
-                    .WithState(e => EntityError.InvalidEmployeeId);
-
-                RuleFor(e => e.TaskId)
-                    .NotEmpty()
-                    .WithState(e => EntityError.InvalidTaskId);
-
-                RuleFor(e => e.Comment)
-                    .NotEmpty()
-                    .WithState(e => EntityError.InvalidComment);
-            }
-
-            public enum EntityError
-            {
-                InvalidEmployeeId,
-                InvalidTaskId,
-                InvalidComment
-            }
+            InvalidEmployeeId,
+            InvalidTaskId,
+            InvalidComment
         }
     }
 }
