@@ -1,7 +1,10 @@
 ﻿using MediatR;
 using Poll.Application.Interfaces;
+using Poll.Domain.Entities;
+using Poll.Domain.Interfaces;
 using Poll.Domain.Queries.Request;
 using Poll.Domain.Queries.Response;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Tnf.Notifications;
 
@@ -10,13 +13,16 @@ namespace Poll.Application.Services
     public class EmployeeAppService : ApplicationServiceBase, IEmployeeAppService
     {
         private readonly IMediator _mediator;
+        private readonly IEmployeeRepository _employeeRepository;
 
         public EmployeeAppService(
            INotificationHandler notification,
+           IEmployeeRepository employeeRepository,
            IMediator mediator)
            : base(notification)
         {
             _mediator = mediator;
+            _employeeRepository = employeeRepository;
 
         }
 
@@ -29,5 +35,8 @@ namespace Poll.Application.Services
 
             return response;
         }
+
+        public Task<List<Employee>> GetAllEmployees()
+            => _employeeRepository.GetAllEmployees();
     }
 }

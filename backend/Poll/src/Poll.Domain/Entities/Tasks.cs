@@ -44,7 +44,8 @@ namespace Poll.Domain.Entities
 
         public enum EntityError
         {
-            InvalidTaskName
+            InvalidTaskName,
+            InvalidTask
         }
     }
 }
