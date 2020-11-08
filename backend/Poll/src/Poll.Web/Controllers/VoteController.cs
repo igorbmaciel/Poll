@@ -21,7 +21,7 @@ namespace Poll.Web.Controllers
         [ProducesResponseType(typeof(AddVoteResponse), 200)]
         [ProducesResponseType(404)]
         [ProducesResponseType(typeof(ErrorResponse), 400)]
-        public async Task<IActionResult> CreateAsync(AddVoteCommand command)
+        public async Task<IActionResult> CreateAsync([FromBody] AddVoteCommand command)
         {
             var response = await _voteAppService.AddVote(command);
 

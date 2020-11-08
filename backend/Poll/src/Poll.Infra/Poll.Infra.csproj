@@ -9,7 +9,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Dapper" Version="2.0.30" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="2.2.4" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.7.0" />
     <PackageReference Include="Tnf.EntityFrameworkCore" Version="2.7.0.21802" />
   </ItemGroup>
 

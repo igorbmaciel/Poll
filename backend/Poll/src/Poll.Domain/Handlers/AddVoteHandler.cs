@@ -54,7 +54,7 @@ namespace Poll.Domain.Handlers
 
             var vote = new Vote();
 
-            vote.AddVote(command.EmployeeId, command.TaskId, command.Comment, _notification);
+            vote = vote.AddVote(command.EmployeeId, command.TaskId, command.Comment, _notification);
 
             if (_notification.HasNotification())
                 return null;
@@ -85,7 +85,8 @@ namespace Poll.Domain.Handlers
                 Id = vote.Id,
                 EmployeeId = vote.EmployeeId,
                 TaskId = vote.TaskId,
-                Comment = vote.Comment
+                Comment = vote.Comment,
+                Date = vote.Date
             };
         }
     }

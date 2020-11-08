@@ -22,7 +22,7 @@ namespace Poll.Web.Controllers
         [ProducesResponseType(typeof(AddEmployeeResponse), 200)]
         [ProducesResponseType(404)]
         [ProducesResponseType(typeof(ErrorResponse), 400)]
-        public async Task<IActionResult> CreateAsync(AddEmployeeCommand command)
+        public async Task<IActionResult> CreateAsync([FromBody] AddEmployeeCommand command)
         {
             var response = await _employeeAppService.AddEmployee(command);
 

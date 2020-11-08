@@ -35,9 +35,9 @@ namespace Poll.Domain.Handlers
 
             var employee = new Employee();
 
-            var password = SetPassword(command.Password); 
+            var password = SetPassword(command.Password);
 
-            employee.AddEmployee(command.Name, command.Email, password, _notification);
+            employee = employee.AddEmployee(command.Name, command.Email, password, _notification);
 
             if (_notification.HasNotification())
                 return null;

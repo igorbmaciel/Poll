@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Poll.Application.Interfaces;
-using Poll.Domain.Entities;
 using Poll.Domain.Queries.Request;
 using Poll.Domain.Queries.Response;
 using System.Collections.Generic;
@@ -23,7 +22,7 @@ namespace Poll.Web.Controllers
         [ProducesResponseType(typeof(AddTaskResponse), 200)]
         [ProducesResponseType(404)]
         [ProducesResponseType(typeof(ErrorResponse), 400)]
-        public async Task<IActionResult> CreateAsync(AddTaskCommand command)
+        public async Task<IActionResult> CreateAsync([FromBody] AddTaskCommand command)
         {
             var response = await _taskAppService.AddTask(command);
 
@@ -37,6 +36,16 @@ namespace Poll.Web.Controllers
         public async Task<IActionResult> Get()
         {
             var response = await _taskAppService.GetAllTasks();
+            return CreateResponseOnGet(response, RouteResponseConsts.Task);
+        }
+
+        [HttpGet("EmployeeVotes")]
+        [ProducesResponseType(typeof(List<GetTasksVotesResponse>), 200)]
+        [ProducesResponseType(typeof(ErrorResponse), 400)]
+        [ProducesResponseType(404)]
+        public async Task<IActionResult> GetTasksEmployeeVotes()
+        {
+            var response = await _taskAppService.GetTasksEmployeeVotes();
             return CreateResponseOnGet(response, RouteResponseConsts.Task);
         }
 
