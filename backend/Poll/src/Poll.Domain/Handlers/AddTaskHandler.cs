@@ -33,7 +33,10 @@ namespace Poll.Domain.Handlers
 
             var tasks = new Tasks();
 
-            tasks.AddTask(command.Name);
+            tasks.AddTask(command.Name, _notification);
+
+            if (_notification.HasNotification())
+                return null;
 
             using (var uow = _unitOfWorkManager.Begin())
             {

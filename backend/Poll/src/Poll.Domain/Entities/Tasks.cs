@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Poll.Domain.AppConst;
+using System;
 using System.Collections.Generic;
+using Tnf.Notifications;
 
 namespace Poll.Domain.Entities
 {
@@ -15,15 +17,34 @@ namespace Poll.Domain.Entities
 
         public virtual List<Vote> VoteList { get; internal set; }
 
-        public Tasks(string name)
+        public Tasks(string name, INotificationHandler notification)
         {
-            Id = Guid.NewGuid();
-            Name = name;           
-        }      
+            if (name.IsNullOrEmpty())
+            {
+                InvalidTaskName(notification);
+                return;
+            }
 
-        internal Tasks AddTask(string name)
+            Id = Guid.NewGuid();
+            Name = name;
+        }
+
+        internal Tasks AddTask(string name, INotificationHandler notification)
         {
-            return new Tasks(name);
-        }       
+            return new Tasks(name, notification);
+        }
+
+        private void InvalidTaskName(INotificationHandler notification)
+        {
+            notification.Raise(notification
+                 .DefaultBuilder
+                 .WithMessage(AppConsts.LocalizationSourceName, EntityError.InvalidTaskName)
+                 .Build());
+        }
+
+        public enum EntityError
+        {
+            InvalidTaskName
+        }
     }
 }
