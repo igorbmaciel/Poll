@@ -14,6 +14,7 @@ namespace Microsoft.Extensions.DependencyInjection
 
             services.AddTransient<IEmployeeAppService, EmployeeAppService>();
             services.AddTransient<ITaskAppService, TaskAppService>();
+            services.AddTransient<IVoteAppService, VoteAppService>();
 
             return services;
         }

@@ -4,5 +4,6 @@
     {
         public const string Employee = "Employee";
         public const string Task = "Task";
+        public const string Vote = "Vote";
     }
 }

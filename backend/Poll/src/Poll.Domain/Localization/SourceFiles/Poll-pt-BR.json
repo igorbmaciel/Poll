@@ -1,9 +1,12 @@
 {
   "culture": "pt-BR",
   "texts": {
-    "InvalidEmployeeName": "Nome do funcionário inválido",
-    "InvalidEmployeeEmail": "Email do funcionário inválido",
-    "InvalidEmployeePassword": "Senha do funcionário inválido",
-    "InvalidTaskName": "Noma da tarefa inválida"
+    "InvalidEmployeeName": "Favor informar o nome do funcionário",
+    "InvalidEmployeeEmail": "Favor informar o email do funcionári",
+    "InvalidEmployeePassword": "Favor informar a senha do funcionário",
+    "InvalidTaskName": "Favor informar o nome da tarefa",
+    "InvalidEmployeeId": "Favor informar o funcionário",
+    "InvalidTaskId": "Favor informar a tarefa",
+    "InvalidComment": "Favor informar o comentário"
   }
 }

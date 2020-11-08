@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Poll.Domain.Entities
 {
@@ -13,6 +14,8 @@ namespace Poll.Domain.Entities
         public string Name  {get; private set; }
         public string Email { get; private set; }
         public string Password { get; private set; }
+
+        public virtual List<Vote> VoteList { get; internal set; }
 
         public Employee(string name, string email, string password)
         {
