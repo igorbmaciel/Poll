@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Poll.Application.Interfaces;
-using Poll.Domain.Entities;
 using Poll.Domain.Queries.Request;
 using Poll.Domain.Queries.Response;
 using System.Collections.Generic;
@@ -31,7 +30,7 @@ namespace Poll.Web.Controllers
         }
 
         [HttpGet]
-        [ProducesResponseType(typeof(List<Employee>), 200)]
+        [ProducesResponseType(typeof(List<GetAllEmployeeResponse>), 200)]
         [ProducesResponseType(typeof(ErrorResponse), 400)]
         [ProducesResponseType(404)]
         public async Task<IActionResult> Get()

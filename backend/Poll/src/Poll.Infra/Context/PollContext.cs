@@ -12,7 +12,7 @@ namespace Poll.Infra.Context
         public DbSet<Tasks> Tasks { get; set; }
         public DbSet<Vote> Votes { get; set; }
 
-        public PollContext(DbContextOptions options, ITnfSession session)
+        public PollContext(DbContextOptions<PollContext> options, ITnfSession session)
            : base(options, session)
         {
         }
