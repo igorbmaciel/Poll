@@ -33,7 +33,10 @@ namespace Poll.Domain.Handlers
 
             var vote = new Vote();
 
-            vote.AddVote(command.EmployeeId, command.TaskId, command.Comment);
+            vote.AddVote(command.EmployeeId, command.TaskId, command.Comment, _notification);
+
+            if (_notification.HasNotification())
+                return null;
 
             using (var uow = _unitOfWorkManager.Begin())
             {
