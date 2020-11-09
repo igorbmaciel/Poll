@@ -149,7 +149,7 @@ Este método irá armazenar os votos de cada funcionário em uma tarefa.<br/>
 - No pgAdmim, clique com o botão direito do mouse na base de dados poll-pgsql > restore
 - Irá aparecer uma tela pedindo o arquivo de backup, selecione o arquivo poll-pgsql.bak
 - Após isso a sua base estará pronta para utilização
-- Caso você não consiga restaurar a base, existe uma outra alternativa, que é utilizar o migration do .net, que pode ser utizada seguindo as intruções do sguinte link: https://docs.microsoft.com/pt-br/ef/core/managing-schemas/migrations/?tabs=dotnet-core-cli
+- Caso você não consiga restaurar a base, existe uma outra alternativa, que é utilizar o migration do .net, que pode ser utizada seguindo as instruções do seguinte link: https://docs.microsoft.com/pt-br/ef/core/managing-schemas/migrations/?tabs=dotnet-core-cli
 - Agora você pode utilizar o sistema acessando o link http://localhost:5033/poll/swagger/index.html
 - Nele contém toda a documentação de cada endpoint, porém já passei o propósito de cada endpoint anteriormente
 
