@@ -6,10 +6,10 @@ Projeto Realizado para o desafio da Alterdata
 R - Foi utilizado o .net core 2.2 com o conceito de DDD e utilizando command e handler, além de estar rodando no docker.
 
 <b>Porque foi escolhido essa arquitetura?</b><br/>
-R- Foi escolhida pois o .net core é um cross plataform, senod facilemnte colocado junto ao docker em qualquer ambiente, além do conceito de DDD utilizadon command e handler, separando cada responsabilidade, dando facil entidmento e manutenção do código, bem como seu ciclo de vida facilmente utilizável.
+R- Foi escolhida pois o .net core é um cross plataform, sendo facilmente colocado junto ao docker em qualquer ambiente, além do conceito de DDD utilizando command e handler, separando cada responsabilidade, dando facil entendimento e manutenção do código, bem como seu ciclo de vida facilmente utilizável.
 
 <b>Quais endpoints foram desenvolvidos?</b><br/>
-R- Foram cridos três endpoints para a finalidade de criar funcionários, tarefas e a votação em si.
+R- Foram criados três endpoints para a finalidade de criar funcionários, tarefas e a votação em si.
 
 <b>Explicando cada endpoint</b>
 
@@ -73,7 +73,7 @@ GET
 
 GET
 /api/Task/EmployeeVotes <br/>
-<b>Irá retornar uma lista de tarefas com os usuários e a hora que eles votaram:</b><br/>
+<b>Irá retornar uma lista de tarefas com os usuários e a hora em que eles votaram:</b><br/>
 [
   {
     "TaskId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
@@ -129,11 +129,11 @@ Este método irá armazenar os votos de cada funcionário em uma tarefa.<br/>
 - Tenha o docker instalado na maquina, caso não tenha, realize o download no seguinte link: https://www.docker.com/get-started
 - Depois escreva a seguinte instrução:  docker-compose up -d --build poll-api
 - Está instrução irá baixar a imagem do postgree sql e depois irá rodar a imagem do poll-api, onde nele está a nossa API
-- Após ter terminado de configurar as imagens, utilieze a instrução: docker ps
+- Após ter terminado de configurar as imagens, utilize a instrução: docker ps
 - Verifique se apareceram duas imagens, com os nomes poll-api e postgres:12, além de ambas estarem com o status Up
 - Caso esteja tudo certo, acesso o seguinte link no seu navegador: http://localhost:5033/poll/swagger/index.html
-- Caso apareça uma apgina do swagger com a API poll, significa que está tudo correto, caso contrário, verifique novamente se o seu docker está rodando direitinho
-- Após isso, teremos que configurar o banco, a imagem postgres:12 vem com a base poll-pgsql, porém sem nenhuma estrutura com as tabelas, para isso precisaremos executar o backup da base
+- Caso apareça uma página do swagger com a API poll, significa que está tudo correto, caso contrário, verifique novamente se o seu docker está rodando direitinho
+- Após isso, teremos que configurar o banco, a imagem postgres:12 vem com a base poll-pgsql, porém sem nenhuma estrutura com as tabelas, para isso precisaremos restaurar o backup da base
 - Mas antes disso, teremos que ter um client de postgres, eu utilizei o pgAdmin, o download pode ser realizado no seguinte link: https://www.pgadmin.org/
 - Após instalado, acesse o client e depois crie uma nova conexão
 - Irá aparecer uma tela pedindo algumas configurações, informe os seguintes dados:
@@ -143,8 +143,8 @@ Este método irá armazenar os votos de cada funcionário em uma tarefa.<br/>
 - Username: pguser 
 - Password: cmsol@strongpass!123
 - Após isso, clique em salvar
-- Casoe steja tudo certo, irá aparecer a base de dados do postgres e a pgsql-data, que é a que utilizaremos a partir de agora
-- Após isso, vá até a pasta Utils.
+- Caso esteja tudo certo, irá aparecer a base de dados do postgres e a pgsql-data, que é a que utilizaremos a partir de agora
+- Após isso, vá até a pasta Utils
 - Nessa pasta, teremos o arquivo poll-pgsql.bak
 - No pgAdmim, clique com o botão direito do mouse na base de dados poll-pgsql > restore
 - Irá aparecer uma tela pedindo o arquivo de backup, selecione o arquivo poll-pgsql.bak
